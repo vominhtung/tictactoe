@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic-tac-toe</title>
+</head>
+<body>
+<h1>Tic-tac-toe</h1>
+<div id="board"></div> <br>
+<button type="button" onclick="changeValue()">Change Value</button>
+
+<script>
+    let board = document.getElementById('board');
+    let arr = []
+    let data = ""
+    for (let i = 0; i < 5; i++) {
+        arr[i] = new Array("(.)", "(.)", "(.)", "(.)", "(.)")
+    }
+
+    for (let i = 0; i < 5; i++) {
+        data += "<br>"
+        for (let j = 0; j < 5; j++) {
+            data += arr[i][j] + "&nbsp;&nbsp;&nbsp;&nbsp;"
+        }
+    }
+    board.innerHTML = data;
+
+    let isX = true;
+    function changeValue() {
+        let x = +prompt("Nhập X");
+        let y = +prompt("Nhập Y");
+
+
+        data = "";
+
+        if (isX) {
+            arr[x][y] = "x";
+            isX = false;
+        } else {
+            arr[x][y] = "o";
+            isX = true;
+        }
+
+        for (let i = 0; i < 5; i++) {
+            data += "<br>"
+            for (let j = 0; j < 5; j++) {
+                data += arr[i][j] + "&nbsp;&nbsp;&nbsp;"
+            }
+        }
+
+        board.innerHTML = data;
+
+        // xử lý x, y thắng
+        for (let i = 0; i < 5; i++) {
+            for (let j = 0; j < 5; j++) {
+                if (arr[i][j] === "x" && arr[i][j+1] === "x" && arr[i][j+2] === "x" ||
+                    arr[i][j] === "x" && arr[i+1][j] === "x" && arr[i+2][j] === "x" ||
+                    arr[i][j] === "x" && arr[i+1][j+1] === "x" && arr[i+2][j+2] === "x" ||
+                    arr[i][j] === "x" && arr[i][j-1] === "x" && arr[i][j-2] === "x" ||
+                    arr[i][j] === "x" && arr[i-1][j] === "x" && arr[i-2][j] === "x" ||
+                    arr[i][j] === "x" && arr[i-1][j-1] === "x" && arr[i-2][j-2] === "x"
+                ) {
+                    alert("x thắng")
+                } else if (
+                    arr[i][j] === "o" && arr[i][j+1] === "o" && arr[i][j+2] === "o" ||
+                    arr[i][j] === "o" && arr[i+1][j] === "o" && arr[i+2][j] === "o" ||
+                    arr[i][j] === "o" && arr[i+1][j+1] === "o" && arr[i+2][j+2] === "o" ||
+                    arr[i][j] === "o" && arr[i][j-1] === "o" && arr[i][j-2] === "o" ||
+                    arr[i][j] === "o" && arr[i-1][j] === "o" && arr[i-2][j] === "o" ||
+                    arr[i][j] === "o" && arr[i-1][j-1] === "o" && arr[i-2][j-2] === "o"
+                ) {
+                    alert("o thắng")
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>
